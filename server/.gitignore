@@ -1,0 +1,4 @@
+node_modules
+*.gz
+*.zip
+.vscode
