@@ -8,7 +8,8 @@ const flash = require('express-flash');
 const path = require('path');
 const mongoose = require('mongoose');
 const expressStatusMonitor = require('express-status-monitor')
-
+const cookieParser = require('cookie-parser');
+const session = require('express-session')
 
 dotenv.config({ path: '.env.dev' });
 
@@ -41,6 +42,26 @@ mongoose.connection.on('error', (err) => {
  app.use(logger('dev'));
  app.use(bodyParser.json());
  app.use(bodyParser.urlencoded({ extended: true }));
+ app.use(cookieParser());
+
+ app.use(session({
+  key: 'user_sid',
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+      expires: 600000
+  }
+}));
+
+app.use((req, res, next) => {
+  if (req.cookies.user_sid && !req.session.user) {
+      res.clearCookie('user_sid');        
+  }
+  next();
+});
+
+
 /**
  * Error Handler.
  */
@@ -56,7 +77,7 @@ if (process.env.NODE_ENV === 'dev') {
 
 
 // Use Api routes in the App
-app.use('/', routes)
+app.use(routes)
 
 
   /**

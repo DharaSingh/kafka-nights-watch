@@ -10,20 +10,11 @@ exports.create = function (req, res) {
     user.email = req.body.email;
     user.password = req.body.password;
 
-    user.save(function (err) {
-        if (err){
-            res.status(500)
-            res.json({
-                message : "User already exists "
-            }).send()
-        }
-        res.status(201).json({
-            message: 'User created',
-            data: {
-                "name" : user.name,
-                "email" : user.email
-            }
-        });
+    user.save().then(user => {
+        req.session.user = user.email;
+        res.redirect('/home');
+    }).catch(error => {
+        res.send('user exists, please login');
     });
 };
 // Handle view contact info
