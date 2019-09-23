@@ -1,6 +1,5 @@
 
 const User = require('../models/User');
-const Session = require('../models/Session')
 
 // create a new user with email, name and password 
 

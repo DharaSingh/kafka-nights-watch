@@ -1,15 +1,14 @@
 // Initialize express router
 let router = require('express').Router();
-var session = require('express-session');
-const User = require('./models/User');
+const User = require('../models/User');
 
-var usercontroller = require('./controllers/user');
+var usercontroller = require('../controllers/userController');
 // Contact routes
 router.route('/user').post(usercontroller.create);
 router.route('/user').get(usercontroller.get)
 
 const sessionChecker = (req, res, next) => {
-    if (req.session.user && req.cookies.user_sid) {
+    if (req.session.user && req.cookies.user_session_id) {
         res.redirect('/home');
     } else {
         next();
@@ -41,7 +40,7 @@ router.route('/login')
 
 // route for user's dashboard
 router.get('/home', (req, res) => {
-    if (req.session.user && req.cookies.user_sid) {
+    if (req.session.user && req.cookies.user_session_id) {
         res.send('home page done');
     } else {
         res.send('please login');
@@ -50,8 +49,8 @@ router.get('/home', (req, res) => {
 
 // route for user logout
 router.get('/logout', (req, res) => {
-    if (req.session.user && req.cookies.user_sid) {
-        res.clearCookie('user_sid');
+    if (req.session.user && req.cookies.user_session_id) {
+        res.clearCookie('user_session_id');
         res.send('log out');
     } else {
         res.send('please login');

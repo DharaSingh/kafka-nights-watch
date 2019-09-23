@@ -13,7 +13,7 @@ const session = require('express-session')
 
 dotenv.config({ path: '.env.dev' });
 
-let routes = require("./routes")
+let routes = require("./routes/routes")
 const app = express();
 /**
  * Connect to MongoDB.
@@ -45,7 +45,7 @@ mongoose.connection.on('error', (err) => {
  app.use(cookieParser());
 
  app.use(session({
-  key: 'user_sid',
+  key: 'user_session_id',
   secret: process.env.SECRET,
   resave: false,
   saveUninitialized: false,
@@ -55,8 +55,8 @@ mongoose.connection.on('error', (err) => {
 }));
 
 app.use((req, res, next) => {
-  if (req.cookies.user_sid && !req.session.user) {
-      res.clearCookie('user_sid');        
+  if (req.cookies.user_session_id && !req.session.user) {
+      res.clearCookie('user_session_id');        
   }
   next();
 });

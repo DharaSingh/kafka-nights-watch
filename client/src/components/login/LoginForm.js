@@ -5,12 +5,10 @@ const LoginForm = () => (
     <Formik
         initialValues={{ email: "", password: "" }}
         onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-                console.log("Logging in", values);
-                setSubmitting(false);
-            }, 500);
-        }}
+            console.log('clicked')
+            setSubmitting(false)
 
+        }}
 
         validationSchema={Yup.object().shape({
             email: Yup.string()
