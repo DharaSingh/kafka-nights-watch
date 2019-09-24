@@ -1,3 +1,29 @@
 {
-	"port": 8080
+    "dev": {
+        "config_id": "dev",
+		"mongo_uri" : "mongodb://127.0.0.1:27017/kafka",
+		"sever_port" : 8080,
+		"kafka" : {
+			"brokers" : "localhost:9092",
+			"client_id" : "kafka-nights-watch"
+		}
+	},
+	"stage": {
+        "config_id": "stage",
+		"mongo_uri" : "mongodb://127.0.0.1:27017/kafka",
+		"sever_port" : 8080,
+		"kafka" : {
+			"brokers" : "localhost:9092",
+			"client_id" : "kafka-nights-watch"
+		}
+	},
+	"prod": {
+        "config_id": "prod",
+		"mongo_uri" : "mongodb://127.0.0.1:27017/kafka",
+		"sever_port" : 8080,
+		"kafka" : {
+			"brokers" : "localhost:9092",
+			"client_id" : "kafka-nights-watch"
+		}
+    }
 }

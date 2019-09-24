@@ -2,10 +2,13 @@
 let router = require('express').Router();
 const User = require('../models/User');
 
-var usercontroller = require('../controllers/userController');
+const usercontroller = require('../controllers/userController');
+const kafkaController = require('../controllers/kafkaController')
+
 // Contact routes
 router.route('/user').post(usercontroller.create);
 router.route('/user').get(usercontroller.get)
+router.route('/kafka/topics').get(kafkaController.getTopics)
 
 const sessionChecker = (req, res, next) => {
     if (req.session.user && req.cookies.user_session_id) {

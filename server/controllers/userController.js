@@ -18,6 +18,7 @@ exports.create = function (req, res) {
 };
 // Handle view contact info
 exports.get = function (req, res) {
+    let deff = 'test'
     User.findByEmail(req.query.email, function (err, user) {
         if (err || !user) {
             res.status(500).send({'data' : 'User not found'});
