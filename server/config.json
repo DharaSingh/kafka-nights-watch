@@ -4,7 +4,7 @@
 		"mongo_uri" : "mongodb://127.0.0.1:27017/kafka",
 		"sever_port" : 8080,
 		"kafka" : {
-			"brokers" : "localhost:9092",
+			"brokers" : "3.16.50.13:9092",
 			"client_id" : "kafka-nights-watch"
 		}
 	},
