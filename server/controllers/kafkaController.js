@@ -1,9 +1,8 @@
 const kafkaservice = require('../services/KafkaService');
-const cacheService = require('../services/CacheService')
 
 exports.getTopics = (request, response) => {
 
-    let val = cacheService.GetTopics();
+    let val = kafkaservice.GetTopics();
     if (val) {
         response.send({data : val, err : null, success: true}).end();
         return ;
@@ -13,7 +12,7 @@ exports.getTopics = (request, response) => {
 
 exports.getGroups = (request, response) => {
    
-    let val = cacheService.GetConsumerGroups();
+    let val = kafkaservice.GetConsumerGroups();
     if (val) {
         response.send({data : val, err : null, success: true}).end();
         return ;
@@ -24,7 +23,7 @@ exports.getGroups = (request, response) => {
 
 exports.describeGroup = (request, response) => {
     let cg = request.query.consumer_group;
-    let val = cacheService.GetConsumerGroup(cg);
+    let val = kafkaservice.GetConsumerGroup(cg);
     if (val) {
         response.send({data : val, err : null, success: true}).end()
         return 
@@ -65,10 +64,10 @@ exports.createTopic = (request, response) => {
 
 exports.getMsgs = (request, response) => {
     let topic = request.query.topic;
-    let val = cacheService.GetConsumerGroup(cg);
+    let val = kafkaservice.GetMsgs(topic);
     if (val) {
         response.send({data : val, err : null, success: true}).end()
         return 
     }
-    response.send({data : null, err : "failed to get consumer group details", success: false}).end()
+    response.send({data : null, err : "failed to get msgs for topic", success: false}).end()
 };

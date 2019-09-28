@@ -12,7 +12,7 @@ router.route('/kafka/topics').get(kafkaController.getTopics)
 router.route('/kafka/groups').get(kafkaController.getGroups);
 router.route('/kafka/group:consumer_group?').get(kafkaController.describeGroup)
 router.route('/kafka/topic').post(kafkaController.createTopic)
-
+router.route('/kafka/msgs:topic?').get(kafkaController.getMsgs)
 const sessionChecker = (req, res, next) => {
     if (req.session.user && req.cookies.user_session_id) {
         res.redirect('/home');
