@@ -1,10 +1,16 @@
 import React from 'react';
-import LoginForm from './components/login/LoginForm';
+import Loader from './components/common/Loader'
+import Dashboard from './components/Dashboard'
+
+
 
 function App() {
+
+  
   return (
     <div className="App">
-      <LoginForm />
+
+      <Dashboard />
     </div>
   );
 }
