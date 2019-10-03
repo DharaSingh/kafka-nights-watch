@@ -106,6 +106,13 @@ const fillConsumerGroups = cron.schedule(
 );
 
 
+const GetBrokers = () => {
+    brokers = global.gConfig.kafka.brokers;
+    if (brokers) {
+        return brokers.split(",", -1).length;
+    }
+    return 0;
+};
 
 const KeyBuilder = args => {
     return args.join("_");
@@ -200,4 +207,4 @@ const GetMsgs = (topic) => {
 }
 
 
-module.exports = { listTopics, listGroups, describeGroup, createTopic, describeConfig, GetTopics, GetConsumerGroups, GetConsumerGroup, GetMsgs };
+module.exports = { listTopics, listGroups, describeGroup, createTopic, describeConfig, GetTopics, GetConsumerGroups, GetConsumerGroup, GetBrokers, GetMsgs };

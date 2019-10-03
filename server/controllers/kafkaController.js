@@ -71,3 +71,9 @@ exports.getMsgs = (request, response) => {
     }
     response.send({data : null, err : "failed to get msgs for topic", success: false}).end()
 };
+
+
+exports.getBrokers = (request, response) => {
+    let brokers = kafkaservice.GetBrokers();
+    response.send({data : {'borkers': brokers}, err : null, success: true}).end()
+};
