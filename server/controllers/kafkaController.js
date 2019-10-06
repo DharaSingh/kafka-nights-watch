@@ -4,7 +4,8 @@ exports.getTopics = (request, response) => {
 
     let val = kafkaservice.GetTopics();
     if (val) {
-        response.send({data : val, err : null, success: true}).end();
+        let tcount = Object.keys(val).length;
+        response.send({data : {"topics" : tcount}, err : null, success: true}).end();
         return ;
     }
     response.send({data : null, err : "failed to get topics list", success: false}).end();
@@ -75,5 +76,5 @@ exports.getMsgs = (request, response) => {
 
 exports.getBrokers = (request, response) => {
     let brokers = kafkaservice.GetBrokers();
-    response.send({data : {'borkers': brokers}, err : null, success: true}).end()
+    response.send({data : {'brokers': brokers}, err : null, success: true}).end()
 };

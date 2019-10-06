@@ -37,7 +37,8 @@ const fillTopics = cron.schedule(
         listTopics((err, resp) => {
             if (!err) {
                 console.log("topics refilled from kafka")
-                Cache.put(TOPICS_KEY, resp);
+                let topics = resp[1].metadata;
+                Cache.put(TOPICS_KEY, topics);
             }
         });
     },
@@ -62,12 +63,8 @@ const consumeMsgs = cron.schedule(
             return
         }
         let newTopicsSet = new Set([]);
-        topics.forEach(element => {
-            if (element.metadata) {
-                Object.keys(element.metadata).forEach(topic => {
-                    newTopicsSet.add(topic);
-                });
-            }
+        Object.keys(topics).forEach(topic => {
+            newTopicsSet.add(topic);
         });
         console.log("new set is ", newTopicsSet)
         let diff = setDiff(newTopicsSet, TopicsSet);

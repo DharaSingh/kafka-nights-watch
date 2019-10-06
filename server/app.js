@@ -11,6 +11,7 @@ const expressStatusMonitor = require('express-status-monitor')
 const cookieParser = require('cookie-parser');
 const session = require('express-session')
 const _ = require('lodash');
+var cors = require('cors')
 
 // module variables
 const config = require('./config.json');
@@ -54,7 +55,7 @@ const port = global.gConfig.server_port
  app.use(bodyParser.json());
  app.use(bodyParser.urlencoded({ extended: true }));
  app.use(cookieParser());
-
+app.use(cors());
 //  app.use(session({
 //   key: 'user_session_id',
 //   secret: process.env.SECRET,

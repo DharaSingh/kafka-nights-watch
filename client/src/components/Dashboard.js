@@ -19,7 +19,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
 import { mainListItems, secondaryListItems } from './listItems';
 
-import Brokers from './Brokers';
+import Card from './Card';
 
 
 
@@ -159,7 +159,12 @@ export default function Dashboard() {
           <Grid container spacing={5}>
             <Grid item xs={1} md={4} lg={3}>
               <Paper className={fixedHeightPaper}>
-                <Brokers />
+              <Card title="Brokers" type="brokers" count={0} />
+              </Paper>
+            </Grid>
+            <Grid item xs={1} md={4} lg={3}>
+              <Paper className={fixedHeightPaper}>
+                <Card title="Topics" type="topics" count={0} />
               </Paper>
             </Grid>
           </Grid>
